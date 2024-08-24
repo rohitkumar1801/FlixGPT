@@ -1,1 +1,1 @@
-# FlixGPT
+# flixgpt
