@@ -1,10 +1,12 @@
 import './index.css'
+import './components/Body.js'
 
-function App() {
+
+const App = () => {
   return (
-    <h1 className="text-xl font-bold underline text-red-500">
-      Hello world!
-    </h1>
+    <div>
+      <Body/>
+    </div>
   );
 }
 
