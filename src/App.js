@@ -1,5 +1,5 @@
 import './index.css'
-import './components/Body.js'
+import Body from "./components/Body"
 
 
 const App = () => {
