@@ -5,11 +5,18 @@ import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [firebaseAuthError, setFirebaseAuthError] = useState(null);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Initialize react-hook-form
   const {
@@ -33,6 +40,20 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
+
+          updateProfile(user, {
+            displayName: data.fullName, photoURL: `https://ui-avatars.com/api/?name=${data.fullName}`
+          }).then(() => {
+            
+            const {uid, email, displayName, photoURL} = auth.currentUser;
+            dispatch(addUser({uid: uid, email : email, displayName: displayName, photoURL: photoURL}));
+
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
+
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -47,6 +68,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
