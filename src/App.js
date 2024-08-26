@@ -6,9 +6,13 @@ import appStore from './utils/appStore';
 
 const App = () => {
   return (
+    <div className="overflow-hidden">
     <Provider store={appStore}>
-      <Body/>
+     <Body/>
+      
     </Provider>
+    </div>
+    
   );
 }
 
